@@ -16,8 +16,8 @@ public class Item {
         this.quality = quality;
     }
 
-   @Override
-   public String toString() {
+    @Override
+    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
     }
 
@@ -29,25 +29,22 @@ public class Item {
 
         if (name.equals("Aged Brie")) {
             increaseQualitySafely();
-            updatePassedBackstageQuality();
             if (sellIn < 0) {
                 increaseQualitySafely();
             }
-            } else {
-            if (!name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (quality <= 0) {
-                    return;
-                }
+        } else if (name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            increaseQualitySafely();
+            updatePassedBackstageQuality();
+            if (sellIn < 0) {
+                quality = 0;
+            }
+        } else {
+            if (quality <= 0) {
+                return;
+            }
+            quality = quality - 1;
+            if (sellIn < 0) {
                 quality = quality - 1;
-                if (sellIn < 0) {
-                    quality = quality - 1;
-                }
-            } else {
-                increaseQualitySafely();
-                updatePassedBackstageQuality();
-                if (sellIn < 0) {
-                    quality = 0;
-                }
             }
         }
     }
@@ -59,14 +56,12 @@ public class Item {
     }
 
     private void updatePassedBackstageQuality() {
-        if (name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            if (sellIn < 10) {
-                increaseQualitySafely();
-            }
+        if (sellIn < 10) {
+            increaseQualitySafely();
+        }
 
-            if (sellIn < 5) {
-                increaseQualitySafely();
-            }
+        if (sellIn < 5) {
+            increaseQualitySafely();
         }
     }
 
