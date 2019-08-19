@@ -1,5 +1,8 @@
 package gildedRose;
 
+import rentalstore.AgedBrie;
+import rentalstore.Sulfuras;
+
 public class Item {
 
 
@@ -25,13 +28,9 @@ public class Item {
 
         switch (name) {
             case "Sulfuras, Hand of Ragnaros":
-                return;
+                new Sulfuras().updateQuality(this);
             case "Aged Brie":
-                decreaseSellIn();
-                increaseQualitySafely();
-                if (sellIn < 0) {
-                    increaseQualitySafely();
-                }
+                new AgedBrie().updateQuality(this);
                 break;
             case "Backstage passes to a TAFKAL80ETC concert":
                 decreaseSellIn();
@@ -58,14 +57,25 @@ public class Item {
         }
     }
 
-    private void decreaseSellIn() {
+    public void decreaseSellIn() {
         sellIn -= 1;
     }
 
-    private void increaseQualitySafely() {
+    public void increaseQualitySafely() {
         if (quality < MAX_QUALITY) {
             quality = quality + 1;
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getSellIn() {
+        return sellIn;
+    }
+
+    public int getQuality() {
+        return quality;
+    }
 }
