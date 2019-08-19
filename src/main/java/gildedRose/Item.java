@@ -2,6 +2,8 @@ package gildedRose;
 
 public class Item {
 
+
+    public static final int MAX_QUALITY = 50;
     public String name;
 
     public int sellIn;
@@ -32,25 +34,19 @@ public class Item {
                     }
                 }
             } else {
-                if (quality < 50) {
+                if (quality < MAX_QUALITY) {
                     quality = quality + 1;
                     if (sellIn < 10) {
-                        if (quality < 50) {
-                            quality = quality + 1;
-                        }
+                        increaseQualitySafely();
                     }
 
                     if (sellIn < 5) {
-                        if (quality < 50) {
-                            quality = quality + 1;
-                        }
+                        increaseQualitySafely();
                     }
                 }
             }
         } else {
-            if (quality < 50) {
-                quality = quality + 1;
-            }
+            increaseQualitySafely();
         }
 
         if (sellIn < 0) {
@@ -65,10 +61,14 @@ public class Item {
                     quality = 0;
                 }
             } else {
-                if (quality < 50) {
-                    quality = quality + 1;
-                }
+                increaseQualitySafely();
             }
+        }
+    }
+
+    private void increaseQualitySafely() {
+        if (quality < MAX_QUALITY) {
+            quality = quality + 1;
         }
     }
 
