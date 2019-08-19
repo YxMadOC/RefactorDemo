@@ -31,6 +31,16 @@ public class GildedRoseTest {
         assertEquals(18, item.quality);
     }
 
+    @Test
+    public void shouldReturn0_givenANormalItemSellInIs10AndQualityIs0() {
+        Item item = new Item(NORMAL_ITEM_NAME, 10, 0);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(0, item.quality);
+    }
+
 
 
 
