@@ -122,13 +122,23 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void shouldReturn50_givenBackstageISellInIs0AndQualityIs20() {
+    public void shouldReturn0_givenBackstageISellInIs0AndQualityIs20() {
         Item item = new Item(BACKSTAGE_NAME, 0, 20);
         GildedRose gildedRose = new GildedRose(new Item[]{item});
 
         gildedRose.updateQuality();
 
         assertEquals(0, item.quality);
+    }
+
+    @Test
+    public void shouldReturn80_givenSulfurasSellInIs10AndQualityIs80() {
+        Item item = new Item(SULFURAS_NAME, 10, 80);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(80, item.quality);
     }
 
 }
