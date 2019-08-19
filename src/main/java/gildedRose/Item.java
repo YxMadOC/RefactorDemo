@@ -34,19 +34,12 @@ public class Item {
                     }
                 }
             } else {
-                if (quality < MAX_QUALITY) {
-                    quality = quality + 1;
-                    if (sellIn < 10) {
-                        increaseQualitySafely();
-                    }
-
-                    if (sellIn < 5) {
-                        increaseQualitySafely();
-                    }
-                }
+                increaseQualitySafely();
+                updatePassedBackstageQuality();
             }
         } else {
             increaseQualitySafely();
+            updatePassedBackstageQuality();
         }
 
         if (sellIn < 0) {
@@ -69,6 +62,18 @@ public class Item {
     private void increaseQualitySafely() {
         if (quality < MAX_QUALITY) {
             quality = quality + 1;
+        }
+    }
+
+    private void updatePassedBackstageQuality() {
+        if (name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            if (sellIn < 10) {
+                increaseQualitySafely();
+            }
+
+            if (sellIn < 5) {
+                increaseQualitySafely();
+            }
         }
     }
 
