@@ -141,4 +141,14 @@ public class GildedRoseTest {
         assertEquals(80, item.quality);
     }
 
+    @Test
+    public void shouldReturn80_givenSulfurasSellInIs0AndQualityIs80() {
+        Item item = new Item(SULFURAS_NAME, 0, 80);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(80, item.quality);
+    }
+
 }
