@@ -1,6 +1,7 @@
 package gildedRose;
 
 import rentalstore.AgedBrie;
+import rentalstore.BackstagePass;
 import rentalstore.Sulfuras;
 
 public class Item {
@@ -33,17 +34,7 @@ public class Item {
                 new AgedBrie().updateQuality(this);
                 break;
             case "Backstage passes to a TAFKAL80ETC concert":
-                decreaseSellIn();
-                increaseQualitySafely();
-                if (sellIn < 10) {
-                    increaseQualitySafely();
-                }
-                if (sellIn < 5) {
-                    increaseQualitySafely();
-                }
-                if (sellIn < 0) {
-                    quality = 0;
-                }
+                new BackstagePass().updateQuality(this);
                 break;
             default:
                 decreaseSellIn();
@@ -77,5 +68,17 @@ public class Item {
 
     public int getQuality() {
         return quality;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSellIn(int sellIn) {
+        this.sellIn = sellIn;
+    }
+
+    public void setQuality(int quality) {
+        this.quality = quality;
     }
 }
