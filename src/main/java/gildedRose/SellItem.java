@@ -1,6 +1,4 @@
-package rentalstore;
-
-import gildedRose.Item;
+package gildedRose;
 
 public interface SellItem {
 

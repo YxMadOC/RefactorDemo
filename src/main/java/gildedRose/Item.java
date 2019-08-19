@@ -1,13 +1,11 @@
 package gildedRose;
 
-import rentalstore.AgedBrie;
-import rentalstore.BackstagePass;
-import rentalstore.Sulfuras;
-
 public class Item {
 
 
     public static final int MAX_QUALITY = 50;
+    public static final int MIN_QUALITY = 0;
+    private SellItem sellItem;
     public String name;
 
     public int sellIn;
@@ -18,6 +16,7 @@ public class Item {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
+        this.sellItem = SellItemFactory.getSellItem(name);
     }
 
     @Override
@@ -26,26 +25,7 @@ public class Item {
     }
 
     public void updateQuality() {
-
-        switch (name) {
-            case "Sulfuras, Hand of Ragnaros":
-                new Sulfuras().updateQuality(this);
-            case "Aged Brie":
-                new AgedBrie().updateQuality(this);
-                break;
-            case "Backstage passes to a TAFKAL80ETC concert":
-                new BackstagePass().updateQuality(this);
-                break;
-            default:
-                decreaseSellIn();
-                if (quality > 0) {
-                    quality = quality - 1;
-                    if (sellIn < 0) {
-                        quality = quality - 1;
-                    }
-                }
-                break;
-        }
+        sellItem.updateQuality(this);
     }
 
     public void decreaseSellIn() {
@@ -54,8 +34,18 @@ public class Item {
 
     public void increaseQualitySafely() {
         if (quality < MAX_QUALITY) {
-            quality = quality + 1;
+            quality += 1;
         }
+    }
+
+    public void decreaseQualitySafely() {
+        if (quality > MIN_QUALITY) {
+            quality = quality - 1;
+        }
+    }
+
+    public void decreaseQuality() {
+        quality -= 1;
     }
 
     public String getName() {
