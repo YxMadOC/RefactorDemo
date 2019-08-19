@@ -121,4 +121,14 @@ public class GildedRoseTest {
         assertEquals(50, item.quality);
     }
 
+    @Test
+    public void shouldReturn50_givenBackstageISellInIs0AndQualityIs20() {
+        Item item = new Item(BACKSTAGE_NAME, 0, 20);
+        GildedRose gildedRose = new GildedRose(new Item[]{item});
+
+        gildedRose.updateQuality();
+
+        assertEquals(0, item.quality);
+    }
+
 }
